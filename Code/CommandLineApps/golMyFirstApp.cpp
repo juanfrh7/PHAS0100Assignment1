@@ -15,6 +15,9 @@
 #include <golMyFunctions.h>
 #include <golExceptionMacro.h>
 #include <iostream>
+#include "DataStructure.h"
+#include <memory>
+#include <utility>    
 
 // Example, header-only library, included in project for simplicity's sake.
 #include <Eigen/Dense>
@@ -25,27 +28,14 @@
  */
 int main(int argc, char** argv)
 {
+  int row = 10;
+  int column = 10;
+  int cell = 10;
+  DataStructure initial(row, column);
+  initial.Create2DGrid();
+  initial.SetRandomlyAlive();
+  initial.GetCellContent(3, 4);
+  initial.PrintGrid();
 
-  int returnStatus = EXIT_FAILURE;
-
-  try
-  {
-
-    Eigen::MatrixXd m(2,2);
-    std::cout << "Printing 2x2 Eigen::MatrixXd ..." << std::endl << m << std::endl;
-
-    std::cout << "Calculating ... " << gol::MyFirstAddFunction(1, 2) << std::endl;
-
-    returnStatus = EXIT_SUCCESS;
-  }
-  catch (gol::Exception& e)
-  {
-    std::cerr << "Caught gol::Exception: " << e.GetDescription() << std::endl;
-  }
-  catch (std::exception& e)
-  {
-    std::cerr << "Caught std::exception: " << e.what() << std::endl;
-  }
-
-  return returnStatus;
+  return 0;
 }
