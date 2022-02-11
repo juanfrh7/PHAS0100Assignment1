@@ -8,7 +8,7 @@ class DataStructure {
         DataStructure();
         DataStructure(const int& rows, const int& columns);
         DataStructure(const int& rows, const int& columns, const int& cells);
-        DataStructure(std::string);
+        DataStructure(std::string path);
         ~DataStructure();
         void Create2DGrid();
         void SetRandomlyAlive();

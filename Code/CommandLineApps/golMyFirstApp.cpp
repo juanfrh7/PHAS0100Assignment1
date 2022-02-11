@@ -33,8 +33,7 @@ int main(int argc, char** argv)
   int cell = 10;
   DataStructure initial(row, column);
   initial.Create2DGrid();
-  initial.SetRandomlyAlive();
-  initial.GetCellContent(3, 4);
+  initial.SetCellContent(1, 1);
   initial.PrintGrid();
 
   return 0;

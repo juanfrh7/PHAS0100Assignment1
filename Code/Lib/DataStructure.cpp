@@ -30,7 +30,28 @@ DataStructure::DataStructure(const int& rows, const int& columns, const int& cel
     cells_ = cells;
 }
 
-DataStructure::DataStructure(std::string) {
+DataStructure::DataStructure(std::string path) {
+    //Open files
+    std::ifstream in(path);
+    std::vector<std::vector<char>> vec2D;
+
+    if (in) {
+        std::string line;
+        
+        while (std::getline(in, line)) {
+            vec2D.push_back(std::vector<char>());
+            
+            // Break down the row into column values
+            std::stringstream split(line);
+            char value;
+            
+            while (split >> value)
+                vec2D.back().push_back(value);
+        }
+    }
+    rows_ = vec2D.size();
+    columns_ = vec2D[0].size();
+    vec2D_ = vec2D;
 }
 
 void DataStructure::Create2DGrid(){
