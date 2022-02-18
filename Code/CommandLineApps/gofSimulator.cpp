@@ -26,15 +26,27 @@
 /**
  * \brief Demo file to check that includes and library linkage is correct.
  */
-int main(int argc, char** argv)
+int main(int argc, char* argv[])
 {
-  int row = 10;
-  int column = 10;
-  int cell = 10;
-  DataStructure initial(row, column);
-  initial.Create2DGrid();
-  initial.SetCellContent(1, 1);
-  initial.PrintGrid();
-
-  return 0;
+    // Check the number of parameters
+    if (argc == 1) {
+      std::cerr << "In order to use the command line, pick between the next options:" << std::endl;
+      std::cerr << argv[0] << " row column cells" << std::endl;
+      std::cerr << "or" << std::endl;
+      std::cerr << argv[0] << " filepath.txt" << std::endl;
+    }
+    if (argc == 2) {
+        DataStructure initial(argv[1]);
+        initial.PrintGrid();
+    }
+    if (argc == 4) {
+      int ia1 = atoi(argv[1]);
+      int ia2 = atoi(argv[2]);
+      int ia3 = atoi(argv[3]); 
+      DataStructure initial(ia1, ia2, ia3);
+      initial.Create2DGrid();
+      initial.SetRandomlyAlive
+      initial.PrintGrid();
+    }
+    return 0;
 }
