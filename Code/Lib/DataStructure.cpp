@@ -118,3 +118,7 @@ void DataStructure::SetCellContent(int x, int y){
     }
 }
 
+std::vector<std::vector<char>> DataStructure::ReturnVec(){ 
+    return vec2D_;
+}
+
