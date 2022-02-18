@@ -15,7 +15,7 @@ class DataStructure {
         void PrintGrid();
         void GetCellContent(int x, int y);
         void SetCellContent(int x, int y);
-        void CountAliveNeighbourCell(int x, int y);
+        int CountAliveNeighbourCell(int x, int y);
 
     private:
         int columns_;

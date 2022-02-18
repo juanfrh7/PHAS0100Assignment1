@@ -73,8 +73,21 @@ void DataStructure::SetRandomlyAlive(){
     }
 }
 
-void DataStructure::CountAliveNeighbourCell(int x, int y){
+int DataStructure::CountAliveNeighbourCell(int x, int y){
+    int i, j, count=0;
+    for(i=x-1; i<=x+1; i++){
+        for(j=y-1;j<=y+1;j++){
+            if((i==x && j==y) || (i<0 || j<0) || (i>=rows_ || j>=columns_)){
+                continue;
+            }
+            if(vec2D_[i][j]=='o'){
+                count++;
+            }
+        }
+    } 
+    return count;
 }
+
 
 void DataStructure::PrintGrid(){ 
     for(int i = 0; i < rows_; i++)
