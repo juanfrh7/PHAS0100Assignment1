@@ -39,8 +39,31 @@ void gameEvolution::CreateGrid(){
 }
 
 void gameEvolution::TakeStep(){
-
+    for(int i = 0; i < rows_; i++)
+    {
+        for(int j = 0; j < columns_; j++)
+        {
+            if(grid_->GetCellContent(i, j) == 'o'){
+                if(grid_->CountAliveNeighbourCell(i, j) == 2 || grid_->CountAliveNeighbourCell(i, j) == 3){
+                    grid_->SetCellContent(i, j, 'o');
+                }
+                else if(grid_->CountAliveNeighbourCell(i, j) < 2 || grid_->CountAliveNeighbourCell(i, j) > 3){
+                    grid_->SetCellContent(i, j, '-');
+                }
+            }
+            if(grid_->GetCellContent(i, j) == '-'){
+                if(grid_->CountAliveNeighbourCell(i, j) == 3){
+                    grid_->SetCellContent(i, j, 'o');
+                }
+                else{
+                    grid_->SetCellContent(i, j, '-');
+                }
+            }
+        }
+    }
+    vec2D_ = grid_->ReturnVec();
 } 
+
 
 void gameEvolution::PrintGrid(){ 
     for(int i = 0; i < rows_; i++)
