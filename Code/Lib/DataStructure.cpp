@@ -109,12 +109,16 @@ char DataStructure::GetCellContent(int x, int y){
     }
 }
 
-void DataStructure::SetCellContent(int x, int y){ 
-    if(vec2D_[x][y] == '-'){
-        vec2D_[x][y] = 'o';
+void DataStructure::SetCellContent(int x, int y, char cell){ 
+    if (cell == 'o'){
+        if(vec2D_[x][y] == '-'){
+            vec2D_[x][y] = 'o';
+        }
     }
-    else{
-        std::cout << "Cell (" << x << "," << y << ") is already alive!"<< std::endl;
+    if (cell == '-'){
+        if(vec2D_[x][y] == 'o'){
+            vec2D_[x][y] = '-';
+        }
     }
 }
 

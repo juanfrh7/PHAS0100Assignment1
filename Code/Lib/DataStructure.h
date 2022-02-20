@@ -14,7 +14,7 @@ class DataStructure {
         void SetRandomlyAlive();
         void PrintGrid();
         char GetCellContent(int x, int y);
-        void SetCellContent(int x, int y);
+        void SetCellContent(int x, int y, char cell);
         int CountAliveNeighbourCell(int x, int y);
         std::vector<std::vector<char>> ReturnVec();
 
