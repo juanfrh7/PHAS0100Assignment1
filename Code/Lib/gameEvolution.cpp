@@ -22,6 +22,22 @@ gameEvolution::gameEvolution(std::shared_ptr<DataStructure> const& grid) {
     grid_ = grid;
 }
 
+void gameEvolution::CreateGridFromFile(){
+    columns_ = grid_->ReturnColumns();
+    rows_ = grid_->ReturnRows();
+    cells_ = grid_->ReturnCells();
+    vec2D_ = grid_->ReturnVec();
+}
+
+void gameEvolution::CreateGrid(){
+    columns_ = grid_->ReturnColumns();
+    rows_ = grid_->ReturnRows();
+    cells_ = grid_->ReturnCells();
+    grid_->Create2DGrid();
+    grid_->SetRandomlyAlive();
+    vec2D_ = grid_->ReturnVec();
+}
+
 void gameEvolution::TakeStep(){
 
 } 

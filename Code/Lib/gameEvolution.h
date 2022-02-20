@@ -9,6 +9,8 @@ class gameEvolution {
         gameEvolution();
         ~gameEvolution();
         gameEvolution(std::shared_ptr<DataStructure> const& grid);
+        void CreateGrid();
+        void CreateGridFromFile();
         void TakeStep();
         void PrintGrid();
 
