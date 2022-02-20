@@ -126,3 +126,15 @@ std::vector<std::vector<char>> DataStructure::ReturnVec(){
     return vec2D_;
 }
 
+int DataStructure::ReturnColumns(){ 
+    return columns_;
+}
+
+int DataStructure::ReturnCells(){ 
+    return cells_;
+}
+
+int DataStructure::ReturnRows(){ 
+    return rows_;
+}
+

@@ -17,6 +17,9 @@ class DataStructure {
         void SetCellContent(int x, int y, char cell);
         int CountAliveNeighbourCell(int x, int y);
         std::vector<std::vector<char>> ReturnVec();
+        int ReturnColumns();
+        int ReturnRows();
+        int ReturnCells();
 
     private:
         int columns_;
