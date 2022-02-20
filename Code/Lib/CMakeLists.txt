@@ -19,6 +19,7 @@ set(PHAS0100ASSIGNMENT1_LIBRARY_SRCS
   golMyFunctions.cpp
   golException.cpp
   DataStructure.cpp
+  gameEvolution.cpp
 )
 
 set(PHAS0100ASSIGNMENT1_LIBRARY_HDRS
