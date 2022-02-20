@@ -1,5 +1,6 @@
 #include <string>
 #include <vector>
+#include <memory>
 #ifndef gameEvolution_h
 #define gameEvolution_h
 
@@ -7,8 +8,7 @@ class gameEvolution {
     public:
         gameEvolution();
         ~gameEvolution();
-        gameEvolution(const int& rows, const int& columns, const int& cells);
-        gameEvolution(std::string path);
+        gameEvolution(std::shared_ptr<DataStructure> const& grid);
         void TakeStep();
         void PrintGrid();
 
@@ -16,8 +16,8 @@ class gameEvolution {
         int columns_;
         int rows_;
         int cells_;
-        std::vector<std::vector<char>> vec2D_1_;
-        std::vector<std::vector<char>> vec2D_2_;
+        std::vector<std::vector<char>> vec2D_;
+        std::shared_ptr<DataStructure> grid_;
 };
 
 #endif

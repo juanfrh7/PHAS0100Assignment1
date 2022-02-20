@@ -18,20 +18,12 @@ gameEvolution::gameEvolution() {
 gameEvolution::~gameEvolution() {
 }
 
-gameEvolution::gameEvolution(const int& rows, const int& columns, const int& cells) {
-    columns_ = columns;
-    rows_ = rows;
-    cells_ = cells;
-    DataStructure initial(rows, columns, cells);
-    initial.Create2DGrid();
-}
-
-gameEvolution::gameEvolution(std::string path) {
-    DataStructure initial(path);
-    initial.Create2DGrid();
+gameEvolution::gameEvolution(std::shared_ptr<DataStructure> const& grid) {
+    grid_ = grid;
 }
 
 void gameEvolution::TakeStep(){
+
 } 
 
 void gameEvolution::PrintGrid(){ 
@@ -39,7 +31,7 @@ void gameEvolution::PrintGrid(){
     {
         for(int j = 0; j < columns_; j++)
         {
-            std::cout << vec2D_2_[i][j] << " ";
+            std::cout << vec2D_[i][j] << " ";
         }
         std::cout << std::endl;
     }
