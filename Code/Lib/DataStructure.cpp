@@ -100,12 +100,12 @@ void DataStructure::PrintGrid(){
     }
 }
 
-void DataStructure::GetCellContent(int x, int y){ 
+char DataStructure::GetCellContent(int x, int y){ 
     if(vec2D_[x][y] == '-'){
-        std::cout << "Cell (" << x << "," << y << ") is dead."<< std::endl;
+        return '-';
     }
     else{
-        std::cout << "Cell (" << x << "," << y << ") is alive."<< std::endl;
+        return 'o';
     }
 }
 
