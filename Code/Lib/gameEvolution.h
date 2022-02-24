@@ -1,6 +1,7 @@
 #include <string>
 #include <vector>
 #include <memory>
+#include "DataStructure.h"
 #ifndef gameEvolution_h
 #define gameEvolution_h
 

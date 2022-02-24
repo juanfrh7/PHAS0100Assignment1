@@ -39,30 +39,31 @@ void gameEvolution::CreateGrid(){
 }
 
 void gameEvolution::TakeStep(){
-    for(int i = 0; i < rows_; i++)
+    grid_->SetGrid(vec2D_);
+    std::vector<std::vector<char>> vec2D_2 = grid_->ReturnVec();
+
+    for(int j = 0; j < rows_; j++)
     {
-        for(int j = 0; j < columns_; j++)
+        for(int i = 0; i < columns_; i++)
         {
-            if(grid_->GetCellContent(i, j) == 'o'){
-                if(grid_->CountAliveNeighbourCell(i, j) == 2 || grid_->CountAliveNeighbourCell(i, j) == 3){
-                    grid_->SetCellContent(i, j, 'o');
+            int neighbours = grid_->CountAliveNeighbourCell(i, j);
+            char cell = grid_->GetCellContent(i, j);
+
+            if(vec2D_[i][j] == 'o' && (neighbours == 2 || neighbours == 3)){
+                vec2D_2[i][j] = 'o';
                 }
-                else if(grid_->CountAliveNeighbourCell(i, j) < 2 || grid_->CountAliveNeighbourCell(i, j) > 3){
-                    grid_->SetCellContent(i, j, '-');
+
+            else if(vec2D_[i][j] == '-' && neighbours == 3){
+                vec2D_2[i][j] = 'o';
                 }
-            }
-            if(grid_->GetCellContent(i, j) == '-'){
-                if(grid_->CountAliveNeighbourCell(i, j) == 3){
-                    grid_->SetCellContent(i, j, 'o');
-                }
-                else{
-                    grid_->SetCellContent(i, j, '-');
-                }
+
+            else{
+                vec2D_2[i][j] = '-';
             }
         }
     }
-    vec2D_ = grid_->ReturnVec();
-} 
+    vec2D_ = vec2D_2;
+}
 
 
 void gameEvolution::PrintGrid(){ 
