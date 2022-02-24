@@ -76,3 +76,7 @@ void gameEvolution::PrintGrid(){
         std::cout << std::endl;
     }
 }
+
+std::vector<std::vector<char>> gameEvolution::ReturnVec(){
+    return vec2D_;
+}

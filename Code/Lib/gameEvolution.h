@@ -14,6 +14,7 @@ class gameEvolution {
         void CreateGridFromFile();
         void TakeStep();
         void PrintGrid();
+        std::vector<std::vector<char>> ReturnVec();
 
     private:
         int columns_;
