@@ -13,6 +13,7 @@ class DataStructure {
         void Create2DGrid();
         void SetRandomlyAlive();
         void PrintGrid();
+        void SetGrid(std::vector<std::vector<char>> vec);
         char GetCellContent(int row, int col);
         void SetCellContent(int row, int col, char cell);
         int CountAliveNeighbourCell(int row, int col);

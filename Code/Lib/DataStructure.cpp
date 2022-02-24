@@ -136,6 +136,9 @@ void DataStructure::SetCellContent(int row, int col, char cell){
     }
 }
 
+void DataStructure::SetGrid(std::vector<std::vector<char>> vec){ 
+    vec2D_ = vec;
+}
 
 std::vector<std::vector<char>> DataStructure::ReturnVec(){ 
     return vec2D_;
