@@ -1,9 +1,9 @@
 #include "DataStructure.h"
 #include <iostream>
-#include <stdio.h>
-#include <stdlib.h>
 #include <fstream>
+#include <stdio.h>
 #include <sstream>
+#include <stdlib.h>
 #include<time.h>
 #include<random>
 #include<vector>
@@ -30,11 +30,11 @@ DataStructure::DataStructure(const int& rows, const int& columns, const int& cel
     cells_ = cells;
 }
 
-DataStructure::DataStructure(std::string path) {
+DataStructure::DataStructure(std::string& path) {
     //Open files
     std::ifstream in(path);
     std::vector<std::vector<char>> vec2D;
-
+    
     if (in) {
         std::string line;
         
@@ -49,8 +49,8 @@ DataStructure::DataStructure(std::string path) {
                 vec2D.back().push_back(value);
         }
     }
-    rows_ = vec2D.size();
-    columns_ = vec2D[0].size();
+    columns_ = vec2D.size();
+    rows_ = vec2D[0].size();
     vec2D_ = vec2D;
 }
 
@@ -61,8 +61,8 @@ void DataStructure::Create2DGrid(){
 
 void DataStructure::SetRandomlyAlive(){
     for(int i = 0; i < cells_; i++){
-        int random_x = rand() % (columns_);
-        int random_y = rand() % (rows_);
+        int random_x = rand() % (columns_-1);
+        int random_y = rand() % (rows_-1);
         if(vec2D_[random_x][random_y] == 'o'){
             i--;
             continue;
@@ -73,21 +73,35 @@ void DataStructure::SetRandomlyAlive(){
     }
 }
 
-int DataStructure::CountAliveNeighbourCell(int x, int y){
-    int i, j, count=0;
-    for(i=x-1; i<=x+1; i++){
-        for(j=y-1;j<=y+1;j++){
-            if((i==x && j==y) || (i<0 || j<0) || (i>=rows_ || j>=columns_)){
-                continue;
-            }
-            if(vec2D_[i][j]=='o'){
-                count++;
-            }
-        }
-    } 
-    return count;
+int DataStructure::CountAliveNeighbourCell(int row, int col){
+    int start = 0;
+    int alive = 0;
+    if(row+1>=start && row+1<rows_ && col>=start && col<columns_ && vec2D_[row+1][col] == 'o'){
+        ++alive;
+    }
+    if(row+1>=start && row+1<rows_ && col-1>=start && col-1<columns_ && vec2D_[row+1][col-1] == 'o'){
+        ++alive;
+    }
+    if(row>=start && row<rows_ && col-1>=start && col-1<columns_ && vec2D_[row][col-1] == 'o'){
+        ++alive;
+    }
+    if(row-1>=start && row-1<rows_ && col-1>=start && col-1<columns_ && vec2D_[row-1][col-1] == 'o'){
+        ++alive;
+    }
+    if(row-1>=start && row-1<rows_ && col>=start && col<columns_ && vec2D_[row-1][col] == 'o'){
+        ++alive;
+    }
+    if(row-1>=start && row-1<rows_ && col+1>=start && col+1<columns_ && vec2D_[row-1][col+1] == 'o'){
+        ++alive;
+    }
+    if(row>=start && row<rows_ && col+1>=start && col+1<columns_ && vec2D_[row][col+1] == 'o'){
+        ++alive;
+    }
+    if(row+1>=start && row+1<rows_ && col+1>=start && col+1<columns_ && vec2D_[row+1][col+1] == 'o'){
+        ++alive;
+    }
+    return alive;
 }
-
 
 void DataStructure::PrintGrid(){ 
     for(int i = 0; i < rows_; i++)
@@ -100,8 +114,8 @@ void DataStructure::PrintGrid(){
     }
 }
 
-char DataStructure::GetCellContent(int x, int y){ 
-    if(vec2D_[x][y] == '-'){
+char DataStructure::GetCellContent(int row, int col){ 
+    if(vec2D_[row][col] == '-'){
         return '-';
     }
     else{
@@ -109,18 +123,19 @@ char DataStructure::GetCellContent(int x, int y){
     }
 }
 
-void DataStructure::SetCellContent(int x, int y, char cell){ 
+void DataStructure::SetCellContent(int row, int col, char cell){ 
     if (cell == 'o'){
-        if(vec2D_[x][y] == '-'){
-            vec2D_[x][y] = 'o';
+        if(vec2D_[row][col] == '-'){
+            vec2D_[row][col] = 'o';
         }
     }
     if (cell == '-'){
-        if(vec2D_[x][y] == 'o'){
-            vec2D_[x][y] = '-';
+        if(vec2D_[row][col] == 'o'){
+            vec2D_[row][col] = '-';
         }
     }
 }
+
 
 std::vector<std::vector<char>> DataStructure::ReturnVec(){ 
     return vec2D_;
@@ -137,4 +152,3 @@ int DataStructure::ReturnCells(){
 int DataStructure::ReturnRows(){ 
     return rows_;
 }
-

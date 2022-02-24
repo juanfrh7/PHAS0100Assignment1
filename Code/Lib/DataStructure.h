@@ -8,14 +8,14 @@ class DataStructure {
         DataStructure();
         DataStructure(const int& rows, const int& columns);
         DataStructure(const int& rows, const int& columns, const int& cells);
-        DataStructure(std::string path);
+        DataStructure(std::string& path);
         ~DataStructure();
         void Create2DGrid();
         void SetRandomlyAlive();
         void PrintGrid();
-        char GetCellContent(int x, int y);
-        void SetCellContent(int x, int y, char cell);
-        int CountAliveNeighbourCell(int x, int y);
+        char GetCellContent(int row, int col);
+        void SetCellContent(int row, int col, char cell);
+        int CountAliveNeighbourCell(int row, int col);
         std::vector<std::vector<char>> ReturnVec();
         int ReturnColumns();
         int ReturnRows();
