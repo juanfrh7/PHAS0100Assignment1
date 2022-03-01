@@ -20,6 +20,9 @@
 #include <memory>
 #include <utility>    
 #include <vector>    
+#include <string>
+#include <thread>
+#include <chrono>
 
 // Example, header-only library, included in project for simplicity's sake.
 #include <Eigen/Dense>
@@ -30,24 +33,24 @@
  */
 int main(int argc, char* argv[])
 {
-
-
     // Check the number of parameters
     if (argc == 1) {
       std::cerr << "In order to use the command line, pick between the next options:" << std::endl;
-      std::cerr << argv[0] << " row column cells" << std::endl;
+      std::cerr << argv[0] << " row column cells iterations" << std::endl;
       std::cerr << "or" << std::endl;
       std::cerr << argv[0] << " filepath.txt" << std::endl;
     }
     if (argc == 3) {
-        std::shared_ptr<DataStructure> initial = std::make_shared<DataStructure>(argv[1]);
-        gameEvolution evolution(initial);
-        evolution.CreateGridFromFile();
-        long arg = strtol(argv[2], NULL, 10);
-        for(int i = 0; i < arg; ++i){
-          std::cout << "Step " << i << std::endl;
-          evolution.PrintGrid();
-          evolution.TakeStep();
+      std::string path = argv[1];
+      std::shared_ptr<DataStructure> initial = std::make_shared<DataStructure>(path);
+      gameEvolution evolution(initial);
+      evolution.CreateGridFromFile();
+      long arg = strtol(argv[2], NULL, 10);
+      for(int i = 0; i < arg; ++i){
+        std::cout << "Step " << i << std::endl;
+        evolution.PrintGrid();
+        evolution.TakeStep();
+        std::this_thread::sleep_for(std::chrono::milliseconds(200));
       }
     }
     if (argc == 5) {
@@ -62,6 +65,7 @@ int main(int argc, char* argv[])
           std::cout << "Step " << i << std::endl;
           evolution.PrintGrid();
           evolution.TakeStep();
+          std::this_thread::sleep_for(std::chrono::milliseconds(200));
       }
     }
     return 0;
