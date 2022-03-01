@@ -35,11 +35,21 @@ int main(int argc, char* argv[])
 {
     // Check the number of parameters
     if (argc == 1) {
-      std::cerr << "In order to use the command line, pick between the next options:" << std::endl;
-      std::cerr << argv[0] << " row column cells iterations" << std::endl;
-      std::cerr << "or" << std::endl;
-      std::cerr << argv[0] << " filepath.txt" << std::endl;
+      std::cerr << "In order to use the gofSimulator command line, pick between the next options:" << std::endl;
+      std::cerr << "  1) "<< argv[0] << " row column cells iterations" << std::endl;
+      std::cerr << "  2) " << argv[0] << " row column cells" << std::endl;
+      std::cerr << "  3) "<< argv[0] << " filepath.txt" << std::endl;
+      std::cerr << "You should specify in the correct order the number of columns, rows, alive cells, iterations and filepath (filepath should be between \"\")" << std::endl;
     }
+
+    if (argc == 2 && (strcmp(argv[1],"--help") == 0 || strcmp(argv[1],"-h") == 0)) {
+      std::cout << "In order to use the gofSimulator command line, pick between the next options:" << std::endl;
+      std::cout << "  1) "<< argv[0] << " row column cells iterations" << std::endl;
+      std::cout << "  2) " << argv[0] << " row column cells" << std::endl;
+      std::cout << "  3) "<< argv[0] << " filepath.txt" << std::endl;
+      std::cout << "You should specify in the correct order the number of columns, rows, alive cells, iterations and filepath (filepath should be between \"\")" << std::endl;
+    }
+
     if (argc == 3) {
       std::string path = argv[1];
       std::shared_ptr<DataStructure> initial = std::make_shared<DataStructure>(path);
@@ -53,6 +63,17 @@ int main(int argc, char* argv[])
         std::this_thread::sleep_for(std::chrono::milliseconds(200));
       }
     }
+
+    if (argc == 4) {
+      long arg1 = strtol(argv[1], NULL, 10);
+      long arg2 = strtol(argv[2], NULL, 10);
+      long arg3 = strtol(argv[3], NULL, 10);
+      DataStructure initial(arg1, arg2, arg3);
+      initial.Create2DGrid();
+      initial.SetRandomlyAlive();
+      initial.PrintGrid();
+    }
+
     if (argc == 5) {
         long arg1 = strtol(argv[1], NULL, 10);
         long arg2 = strtol(argv[2], NULL, 10);
