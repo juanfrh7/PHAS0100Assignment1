@@ -49,8 +49,8 @@ DataStructure::DataStructure(std::string& path) {
                 vec2D.back().push_back(value);
         }
     }
-    columns_ = vec2D.size();
-    rows_ = vec2D[0].size();
+    rows_ = vec2D.size();
+    columns_ = vec2D[0].size();
     vec2D_ = vec2D;
 }
 
