@@ -19,7 +19,10 @@
 #include "gameEvolution.h"
 #include <memory>
 #include <utility>    
+#include <ctime>
 #include <vector>    
+#include <random>
+#include<cstdlib>
 
 // Example, header-only library, included in project for simplicity's sake.
 #include <Eigen/Dense>
@@ -32,8 +35,13 @@ int main(int argc, char* argv[])
 {
     // Check the number of parameters
     if (argc == 1) {
-      std::cerr << "In order to use the command line, pick between the next options:" << std::endl;
-      std::cerr << argv[0] << " row column cells iterations states" << std::endl;
+      std::cerr << "In order to use the stationaryPatterns command line, you should specify:" << std::endl;
+      std::cerr << argv[0] << " row column max_cells iterations states" << std::endl;
+    }
+
+    if (argc == 2 && (strcmp(argv[1],"--help") == 0 || strcmp(argv[1],"-h") == 0)) {
+        std::cerr << "In order to use the stationaryPatterns command line, you should specify:" << std::endl;
+        std::cerr << argv[0] << " row column max_cells iterations states" << std::endl;
     }
     if (argc == 6) {
         long arg1 = strtol(argv[1], NULL, 10);
@@ -42,31 +50,35 @@ int main(int argc, char* argv[])
         long arg4 = strtol(argv[4], NULL, 10);
         long arg5 = strtol(argv[5], NULL, 10);
 
-        std::cout << arg5 << std::endl;
+        srand(time(0));
+
         for(int j; j< arg5; ++j){
-          std::shared_ptr<DataStructure> initial = std::make_shared<DataStructure>(arg1, arg2, arg3);
+          int cell = rand() % arg3;
+          std::shared_ptr<DataStructure> initial = std::make_shared<DataStructure>(arg1, arg2, cell);
           gameEvolution evolution(initial);
           evolution.CreateGrid();
-          std::cout << "State " << j << " at iteration 0 " << std::endl;
-          evolution.PrintGrid();
+          auto original = evolution.ReturnVec();
           for(int i = 0; i < arg4; ++i){
             auto x = evolution.ReturnVec();
             evolution.TakeStep();
             auto y = evolution.ReturnVec();
-            if(x == y){
-              std::vector<std::vector<char>> vec(arg2, std::vector<char> (arg3, '-'));
-              if(y == vec){
-                std::cout << "State " << j << " has no pattern " << std::endl;
+            std::vector<std::vector<char>> vec(arg1, std::vector<char> (arg2, '-'));
+            if(y == vec){
                 break;
-              }
-              else{
+                }
+            if(x == y){
+              std::cout << "\n" << std::endl;
+              std::cout << "State " << j << " with " << cell << " alive cells at iteration 0 " << std::endl;
+              evolution.PrintOriginalGrid();
+              std::cout << "\n" << std::endl;
               std::cout << "State " << j << " has a pattern at iteration " << i + 1 << std::endl;
               evolution.PrintGrid();
+              std::cout << "\n" << std::endl;
+              std::cout << "-----------------------------------" << std::endl;
               break;
+              }
+            }
           }
         }
-      }
-    }
-  }
   return 0;
 }
