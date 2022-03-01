@@ -27,6 +27,7 @@ void gameEvolution::CreateGridFromFile(){
     rows_ = grid_->ReturnRows();
     cells_ = grid_->ReturnCells();
     vec2D_ = grid_->ReturnVec();
+    original_ = grid_->ReturnVec();
 }
 
 void gameEvolution::CreateGrid(){
@@ -36,6 +37,7 @@ void gameEvolution::CreateGrid(){
     grid_->Create2DGrid();
     grid_->SetRandomlyAlive();
     vec2D_ = grid_->ReturnVec();
+    original_ = grid_->ReturnVec();
 }
 
 void gameEvolution::TakeStep(){
@@ -65,13 +67,23 @@ void gameEvolution::TakeStep(){
     vec2D_ = vec2D_2;
 }
 
-
 void gameEvolution::PrintGrid(){ 
     for(int i = 0; i < rows_; i++)
     {
         for(int j = 0; j < columns_; j++)
         {
             std::cout << vec2D_[i][j] << " ";
+        }
+        std::cout << std::endl;
+    }
+}
+
+void gameEvolution::PrintOriginalGrid(){ 
+    for(int i = 0; i < rows_; i++)
+    {
+        for(int j = 0; j < columns_; j++)
+        {
+            std::cout << original_[i][j] << " ";
         }
         std::cout << std::endl;
     }
