@@ -30,7 +30,7 @@ DataStructure::DataStructure(const int& rows, const int& columns, const int& cel
     cells_ = cells;
 }
 
-DataStructure::DataStructure(std::string& path) {
+DataStructure::DataStructure(std::string& path ) {
     //Open files
     std::ifstream in(path);
     std::vector<std::vector<char>> vec2D;
@@ -61,8 +61,8 @@ void DataStructure::Create2DGrid(){
 
 void DataStructure::SetRandomlyAlive(){
     for(int i = 0; i < cells_; i++){
-        int random_x = rand() % (columns_-1);
-        int random_y = rand() % (rows_-1);
+        int random_x = rand() % (columns_);
+        int random_y = rand() % (rows_);
         if(vec2D_[random_x][random_y] == 'o'){
             i--;
             continue;
