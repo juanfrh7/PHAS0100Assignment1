@@ -43,7 +43,7 @@ int main(int argc, char* argv[])
       std::cerr << "  1) "<< argv[0] << " row column cells iterations" << std::endl;
       std::cerr << "  2) " << argv[0] << " row column cells" << std::endl;
       std::cerr << "  3) "<< argv[0] << " filepath.txt" << std::endl;
-      std::cerr << "You should specify in the correct order the number of columns, rows, alive cells, iterations and filepath (filepath should be between \"\")" << std::endl;
+      std::cerr << "You should specify in the correct order the number of columns, rows, alive cells, iterations and filepath " << std::endl;
     }
 
     //define the help argument
@@ -52,7 +52,7 @@ int main(int argc, char* argv[])
       std::cout << "  1) "<< argv[0] << " row column cells iterations" << std::endl;
       std::cout << "  2) " << argv[0] << " row column cells" << std::endl;
       std::cout << "  3) "<< argv[0] << " filepath.txt" << std::endl;
-      std::cout << "You should specify in the correct order the number of columns, rows, alive cells, iterations and filepath (filepath should be between \"\")" << std::endl;
+      std::cout << "You should specify in the correct order the number of columns, rows, alive cells, iterations and filepath" << std::endl;
     }
 
     //defines and evolves a grid given a filepath
@@ -69,6 +69,7 @@ int main(int argc, char* argv[])
 
       //evolve and print the grid for each iteration
       for(int i = 0; i < arg; ++i){
+        std::cout << "\n" << std::endl;
         std::cout << "Step " << i << std::endl;
         evolution.PrintGrid();
         evolution.TakeStep();
@@ -107,6 +108,7 @@ int main(int argc, char* argv[])
 
       //evolve the system and print it 
       for(int i = 0; i < arg4; ++i){
+        std::cout << "\n" << std::endl;
         std::cout << "Step " << i << std::endl;
         evolution.PrintGrid();
         evolution.TakeStep();
