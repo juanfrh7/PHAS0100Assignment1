@@ -16,6 +16,9 @@ class gameEvolution {
         void PrintGrid();
         void PrintOriginalGrid();
         std::vector<std::vector<char>> ReturnVec();
+        int ReturnColumns();
+        int ReturnCells();
+        int ReturnRows();
 
     private:
         int columns_;
