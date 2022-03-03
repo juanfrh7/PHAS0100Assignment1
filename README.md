@@ -11,7 +11,14 @@ Purpose
 This project serves as a starting point for the PHAS0100 2021/22 Assignment 1 Game of Life Simulation coursework. It has a reasonable folder structure for [CMake](https://cmake.org/) based projects,
 that use [CTest](https://cmake.org/) to run unit tests via [Catch](https://github.com/catchorg/Catch2). 
 
-Further information on the specific project is left as an exercise for the student.
+This project aims at simualting Conway’s Game of Life, consisiting of 2D cellular automaton devised by the British mathematician John Conway in 1970. The rules of the game are very simple:
+    1) A live cell with two or three alive neighbours remains alive.
+    2) A dead cell with three live neighbours becomes a live cell.
+    3) All other live and dead cells die in the next generation.
+
+In the DataStructure class we have build a simulation app that defines the game structure given a set of initial conditions. These conditions could be a filepath to a .txt file or the dimensions, number of alive cells and iterations. Moreover, in the gameEvolution class we have defined the rules necessary to evolve our system according to the rules defined above. 
+
+Finally, in the golBasicTest file we have defined a set of tests to check the correct functioning of the files. Here, we check for correct output and input types, ranges, dimensions, etc.
 
 
 Credits
@@ -25,4 +32,31 @@ and [Dr. Matt Clarkson](https://iris.ucl.ac.uk/iris/browse/profile?upi=MJCLA42).
 Build Instructions
 ------------------
 
-Build and run instructions are left as an excercise for the student. Examples of how to build using cmake were given in lectures and in the other CMake example projects.
+First, we need to build the build function and create the CMake files necessary to run the game. In order to do this, we have to make sure we are in the correct directory: this is PHAS0100Assignment1. Here, we will create a new directory called build by running in the command line: mkdir build. Then we get in the folder by running cd build, and once in here, 
+in the command line we run: cmake ..
+Finally, we just need to run make. It is important that while running the following executables, we remain in the build directory.
+
+The game can be accessed by running the executable ./bin/gofSimulator and specifying the arguments through the command line. Specifically, what you can run is:
+    1) ./bin/gofSimulator:    displays all the options that you can run through the command line
+    2) ./bin/gofSimulator --help (-h):    displays all the options that you can run through the command line
+    3) ./bin/gofSimulator filepath iterations:    prints the evolution of a grid given a filepath 
+    4) ./bin/gofSimulator rows columns cells:    prints a grid given the dimensions and number of cells spread randomly
+    5) ./bin/gofSimulator rows columns cells iterations:    prints the evolution of the grid given the dimensions and number of cells.
+
+In order to check if the system evolves to a stationary pattern, we have build the stationaryPattern command line that prints the original and final stationaty pattern, if there is any. To check for patterns, you should run the executable ./bin/stationaryPatterns and specifying the arguments through the command line. Specifically, what you can run is:
+    1) ./bin/stationaryPatterns:    displays all the options that you can run through the command line
+    2) ./bin/stationaryPatterns --help (-h):    displays all the options that you can run through the command line
+    3) ./bin/stationaryPatterns rows columns cells iterations states:    prints the original and final stationary pattern for all the states, if there is any.  
+
+In order to check that the tests are working, run ./bin/golBasicTest
+
+
+Results
+------------------
+
+- 7 by 7 grid with 15 alive cells after 6 iterations
+![Image1](result_images/random_state_evolution.png)
+- glider.txt grid after 4 iterations
+![Image2](result_images/glider_evolution.png)
+- 4 by 4 grid with a maximum of 15 alive cells for 10 different configurations iterated 20 times each. The following are some examples of the patterns found  
+![Image3](result_images/stationary_pattern.png)
