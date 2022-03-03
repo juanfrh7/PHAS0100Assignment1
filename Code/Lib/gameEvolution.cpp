@@ -121,7 +121,7 @@ void gameEvolution::PrintOriginalGrid(){
 
 //-----------------------------------------------------------------------------------------//
 
-std::vector<std::vector<char>> DataStructure::ReturnVec(){ 
+std::vector<std::vector<char>> gameEvolution::ReturnVec(){ 
     // Function that returns the current vector grid
 
     return vec2D_;
@@ -129,14 +129,14 @@ std::vector<std::vector<char>> DataStructure::ReturnVec(){
 
 //-----------------------------------------------------------------------------------------//
 
-int DataStructure::ReturnColumns(){ 
+int gameEvolution::ReturnColumns(){ 
     // Function that returns the number of columns
     return columns_;
 }
 
 //-----------------------------------------------------------------------------------------//
 
-int DataStructure::ReturnCells(){ 
+int gameEvolution::ReturnCells(){ 
     // Function that returns the number of cells
 
     return cells_;
@@ -144,7 +144,7 @@ int DataStructure::ReturnCells(){
 
 //-----------------------------------------------------------------------------------------//
 
-int DataStructure::ReturnRows(){
+int gameEvolution::ReturnRows(){
     // Function that returns the number of rows
 
     return rows_;
