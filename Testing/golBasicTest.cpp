@@ -20,11 +20,12 @@
 #include <vector>
 #include <typeinfo>
 #include <cstring>
+#include <stdexcept>
 
 TEST_CASE( "Data Structure test 1", "[columns, rows and random cell constructor]" ) {
   int col = 5;
   int row = 5;
-  int cells = (row-1)*(col-1);
+  int cells = row * col;
   std::vector<std::vector<char>> vec(row, std::vector<char> (col, '-'));
   DataStructure initial(row, col);
   initial.Create2DGrid();
@@ -64,7 +65,6 @@ TEST_CASE( "Data Structure test 2", "[Set/Get cell content function]" ) {
   REQUIRE( initial.GetCellContent(5, 5) == '-' );
   REQUIRE( strcmp(typeid(initial.GetCellContent(5, 5)).name(), "c") == 0 );
 }
-
 
 TEST_CASE( "Data Structure test 3", "[columns, rows and cell constructor]" ) {
   int col = 5;
@@ -133,10 +133,109 @@ TEST_CASE( "Data Structure test 5", "[Count alive neighbour cells function]" ) {
   REQUIRE( strcmp(typeid(z).name(),  "i") == 0  );
 }
 
+TEST_CASE( "Data Structure negative test 1", "[Invalid ranges]" ) {
+
+  int col = -20;
+  int row = 0;
+
+  try
+  {
+    DataStructure initial(row, col);
+  }
+
+  //check that it outputs the correct message
+  catch (std::invalid_argument& e)
+  {
+    REQUIRE( strcmp(e.what(),  "Columns and rows should be grater than 1") == 0 );
+  }
+}
+
+TEST_CASE( "Data Structure negative test 2", "[Invalid ranges]" ) {
+
+  int col = -200;
+  int row = -10;
+  int cell = -3;
+
+  try
+  {
+    DataStructure initial(row, col, cell);
+  }
+
+  //check that it outputs the correct message
+  catch (std::invalid_argument& e)
+  {
+    REQUIRE( strcmp(e.what(), "Columns and rows should be grater than 1, and cells greater than 0") == 0 );
+  }
+}
+
+TEST_CASE( "Data Structure negative test 3", "[Empty file]" ) {
+
+  try
+  {
+    std::string path = "/workspaces/PHAS0100Assignment1/Testing/Data/input.txt";
+    DataStructure initial(path);
+  }
+
+  //check that it outputs the correct message
+  catch (std::invalid_argument& e)
+  {
+    REQUIRE( strcmp(e.what(), "File is empty") == 0 );
+  }
+}
+
+TEST_CASE( "Data Structure negative test 4", "[Invalid count alive neighbour cell argument and type]" ) {
+
+  try
+  {
+    std::string path = "/workspaces/PHAS0100Assignment1/Testing/Data/oscillators.txt";
+    DataStructure initial(path);
+    initial.CountAliveNeighbourCell(100, 100);
+  }
+
+  //check that it outputs the correct message
+  catch (std::invalid_argument& e)
+  {
+    REQUIRE( strcmp(e.what(), "Rows and columns should be within the correct range") == 0 );
+  }
+}
+
+TEST_CASE( "Data Structure negative test 5", "[Get cell content]" ) {
+
+  try
+  {
+    std::string path = "/workspaces/PHAS0100Assignment1/Testing/Data/oscillators.txt";
+    DataStructure initial(path);
+    initial.GetCellContent(100, 100);
+  }
+
+  //check that it outputs the correct message
+  catch (std::invalid_argument& e)
+  {
+    REQUIRE( strcmp(e.what(), "Rows and columns should be within the correct range") == 0 );
+  }
+}
+
+TEST_CASE( "Data Structure negative test 6", "[Set cell content]" ) {
+
+  try
+  {
+    std::string path = "/workspaces/PHAS0100Assignment1/Testing/Data/oscillators.txt";
+    DataStructure initial(path);
+    initial.SetCellContent(-100, -100, 'o');
+  }
+
+  //check that it outputs the correct message
+  catch (std::invalid_argument& e)
+  {
+    REQUIRE( strcmp(e.what(), "Rows and columns should be within the correct range") == 0 );
+  }
+
+}
+
 TEST_CASE( "Evolution test 1", "[columns, rows and random cell constructor]" ) {
   int col = 5;
   int row = 5;
-  int cells = (row-1)*(col-1);
+  int cells = row * col;
   std::shared_ptr<DataStructure> initial = std::make_shared<DataStructure>(row, col);
   gameEvolution evolution(initial);
   evolution.CreateGrid();
