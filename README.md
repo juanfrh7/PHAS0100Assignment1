@@ -32,21 +32,32 @@ and [Dr. Matt Clarkson](https://iris.ucl.ac.uk/iris/browse/profile?upi=MJCLA42).
 Build Instructions
 ------------------
 
-First, we need to build the build function and create the CMake files necessary to run the game. In order to do this, we have to make sure we are in the correct directory: this is PHAS0100Assignment1. Here, we will create a new directory called build by running in the command line: mkdir build. Then we get in the folder by running cd build, and once in here, 
-in the command line we run: cmake ..
-Finally, we just need to run make. It is important that while running the following executables, we remain in the build directory.
+First, we need to build the build function and create the CMake files necessary to run the game. To do this, we have to make sure we are in the correct directory: this is PHAS0100Assignment1.Then, the following arguments should be given to the command line:
+
+```shell
+mkdir build
+cd build
+cmake ..
+make
+```
 
 The game can be accessed by running the executable ./bin/gofSimulator and specifying the arguments through the command line. Specifically, what you can run is:
-    1) ./bin/gofSimulator:    displays all the options that you can run through the command line
-    2) ./bin/gofSimulator --help (-h):    displays all the options that you can run through the command line
-    3) ./bin/gofSimulator filepath iterations:    prints the evolution of a grid given a filepath 
-    4) ./bin/gofSimulator rows columns cells:    prints a grid given the dimensions and number of cells spread randomly
-    5) ./bin/gofSimulator rows columns cells iterations:    prints the evolution of the grid given the dimensions and number of cells.
+
+```shell
+./bin/gofSimulator
+./bin/gofSimulator --help (-h)
+./bin/gofSimulator filepath iterations
+./bin/gofSimulator rows columns cells
+./bin/gofSimulator rows columns cells iterations
+```
 
 In order to check if the system evolves to a stationary pattern, we have build the stationaryPattern command line that prints the original and final stationaty pattern, if there is any. To check for patterns, you should run the executable ./bin/stationaryPatterns and specifying the arguments through the command line. Specifically, what you can run is:
-    1) ./bin/stationaryPatterns:    displays all the options that you can run through the command line
-    2) ./bin/stationaryPatterns --help (-h):    displays all the options that you can run through the command line
-    3) ./bin/stationaryPatterns rows columns cells iterations states:    prints the original and final stationary pattern for all the states, if there is any.  
+
+```shell
+./bin/stationaryPatterns
+./bin/stationaryPatterns --help (-h)
+./bin/stationaryPatterns rows columns cells iterations states  
+```
 
 In order to check that the tests are working, run ./bin/golBasicTest
 
